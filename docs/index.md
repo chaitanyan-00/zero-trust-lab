@@ -304,13 +304,4 @@ chmod +x verify.sh
 
 ------------------------------------------------------------------------
 
-# Lab Completion
-
-You have implemented:
-
--   Identity-based networking
--   Microsegmentation
--   Least privilege access
--   AI-driven security analysis
-
 Congratulations 🎉
