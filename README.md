@@ -1,65 +1,79 @@
-# Zero Trust & Identity Lab 🔐
+# 🔐 Zero Trust & Identity Lab
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://chaitanyan-00.github.io/zero-trust-lab)
-[![Lab Duration](https://img.shields.io/badge/duration-2%20hours-blue)](https://chaitanyan-00.github.io/zero-trust-lab)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Kali Linux](https://img.shields.io/badge/OS-Kali%20Linux-blueviolet)](https://www.kali.org/)
-[![Tailscale](https://img.shields.io/badge/ZTNA-Tailscale-green)](https://tailscale.com)
-
-A hands-on lab designed for **Junior Security Analysts** to demonstrate the transition from **Traditional Perimeter Security** (implicit trust) to a **Zero Trust Architecture (ZTA)** based on **NIST SP 800-207**.
+> A hands-on lab demonstrating the transition from Traditional Perimeter Security to Zero Trust Architecture (ZTA) based on NIST SP 800-207.
 
 ---
 
-## 📋 Table of Contents
-- [Introduction](#introduction)
-- [Learning Objectives](#learning-objectives)
-- [Prerequisites](#prerequisites)
-- [Technical Stack](#technical-stack)
-- [Lab Milestones](#lab-milestones)
-- [Quick Start](#quick-start)
-- [Step-by-Step Guide](#step-by-step-guide)
-- [Verification](#verification)
-- [Troubleshooting](#troubleshooting)
-- [GenAI Security Co-Pilot](#genai-security-co-pilot)
-- [License](#license)
+## 📌 Overview
+
+This project simulates a real-world Zero Trust environment using open-source tools.
+
+Instead of trusting devices based on network location (IP-based trust), this lab enforces:
+
+- Identity-based authentication
+- Micro-segmented access control
+- Least privilege at OS level
+- Continuous monitoring using logs + AI
 
 ---
 
-## Introduction
+## 🎯 Learning Objectives
 
-Traditional network security operates like a castle with a moat—hard on the outside, soft on the inside. Once an attacker breaches the perimeter, they can move laterally with ease. Zero Trust Architecture flips this model: **never trust, always verify**.
+By completing this lab, you will:
+
+- Understand **Identity-Centric Connectivity**
+- Implement **Zero Trust Networking using Tailscale**
+- Enforce **Micro-segmentation using ACL policies**
+- Apply the **Principle of Least Privilege (RBAC)**
+- Use **Generative AI for security log analysis**
+
+---
+
+## 🛠️ Tech Stack
+
+| Component        | Technology            | Purpose |
+|----------------|----------------------|--------|
+| OS             | Kali Linux           | Lab environment |
+| Network        | Tailscale            | Zero Trust Networking |
+| Identity       | GitHub SSO           | Authentication |
+| Access Control | Tailscale ACLs       | Micro-segmentation |
+| OS Security    | sudoers              | Least privilege |
+| Service        | Python HTTP Server   | Test application |
+| AI             | ChatGPT / Claude     | Security analysis |
+
+---
+
+## ⚙️ Prerequisites
+
+- Kali Linux (or Ubuntu/Debian)
+- GitHub account
+- Basic Linux command knowledge
+- Internet connection
+
+---
+
+## 🚀 Lab Guide (Step-by-Step)
+
+👉 **Live Lab Guide:**  
+https://chaitanyan-00.github.io/zero-trust-lab
+
+---
+
+## 🔐 Architecture Diagram (Trust Boundary)
 
 ```mermaid
-graph TD
-    subgraph "Traditional Perimeter Security (Implicit Trust)"
-        A[Internet] --> B[Firewall]
-        B --> C[Internal Network]
-        C --> D[Web Server<br/>Ports: 22,80,443,8080]
-        C --> E[Database Server<br/>Ports: 22,3306,5432]
-        F[Attacker] -->|Breaches Perimeter| C
-        C -.->|Lateral Movement| D
-        C -.->|Lateral Movement| E
-    end
-    
-    subgraph "Zero Trust Architecture (NIST SP 800-207)"
-        G[Internet] --> H{Identity-Based<br/>Access Control}
-        H -->|GitHub SSO| I[Tailscale Mesh Network]
-        
-        subgraph "Micro-segmented Services"
-            J[Web Service<br/>Port 8080 Only]
-            K[Database<br/>Port 3306 Only]
-            L[SSH Access<br/>Port 22 Only for Admins]
-        end
-        
-        I -->|Identity: SeniorAdmin| J
-        I -->|Identity: SeniorAdmin| K
-        I -->|Identity: JuniorAdmin| L
-        
-        M[Attacker] -->|No Valid Identity| H
-        M -.->|Blocked by ACL| J
-        M -.->|Blocked by ACL| K
-    end
+flowchart LR
 
-    style B fill:#f96,stroke:#333,stroke-width:2px
-    style H fill:#9f6,stroke:#333,stroke-width:2px
-    style M fill:#f66,stroke:#333,stroke-width:2px
+User[User Identity (GitHub SSO)]
+ZTNA[Tailscale Network]
+Server[Kali Linux Node]
+Service[Web Service :8080]
+Secrets[Sensitive File (/etc/zero-trust-secrets.conf)]
+
+User -->|Authenticated| ZTNA
+ZTNA --> Server
+Server --> Service
+Server --> Secrets
+
+Service -->|Allowed Access| User
+Secrets -->|Blocked Access| User
