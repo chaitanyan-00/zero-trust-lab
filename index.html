@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zero Trust Lab</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: #00ff00; padding: 2rem; }
+        .success { border: 2px solid #00ff00; padding: 1rem; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="success">
+        <h1>✅ Zero Trust Active</h1>
+        <p>This service is protected by Tailscale ACLs.</p>
+        <p>Access is restricted to authenticated users only.</p>
+        <p>Timestamp: <span id="timestamp"></span></p>
+    </div>
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+    </script>
+</body>
+</html>
