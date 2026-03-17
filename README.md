@@ -1,79 +1,52 @@
 # 🔐 Zero Trust & Identity Lab
 
-> A hands-on lab demonstrating the transition from Traditional Perimeter Security to Zero Trust Architecture (ZTA) based on NIST SP 800-207.
+## 📌 Introduction
 
----
+This lab demonstrates the transition from **Traditional Perimeter Security** (implicit trust) to a **Zero Trust Architecture (ZTA)** based on **NIST SP 800-207**.
 
-## 📌 Overview
+Instead of relying on network location or IP-based trust, this lab enforces:
 
-This project simulates a real-world Zero Trust environment using open-source tools.
+- Identity-based access control
+- Micro-segmentation of services
+- Least privilege at the operating system level
+- Continuous monitoring through logs and AI analysis
 
-Instead of trusting devices based on network location (IP-based trust), this lab enforces:
-
-- Identity-based authentication
-- Micro-segmented access control
-- Least privilege at OS level
-- Continuous monitoring using logs + AI
+The implementation uses modern, open-source tools to simulate a real-world Zero Trust environment.
 
 ---
 
 ## 🎯 Learning Objectives
 
-By completing this lab, you will:
+By completing this lab, you will be able to:
 
-- Understand **Identity-Centric Connectivity**
-- Implement **Zero Trust Networking using Tailscale**
-- Enforce **Micro-segmentation using ACL policies**
-- Apply the **Principle of Least Privilege (RBAC)**
-- Use **Generative AI for security log analysis**
-
----
-
-## 🛠️ Tech Stack
-
-| Component        | Technology            | Purpose |
-|----------------|----------------------|--------|
-| OS             | Kali Linux           | Lab environment |
-| Network        | Tailscale            | Zero Trust Networking |
-| Identity       | GitHub SSO           | Authentication |
-| Access Control | Tailscale ACLs       | Micro-segmentation |
-| OS Security    | sudoers              | Least privilege |
-| Service        | Python HTTP Server   | Test application |
-| AI             | ChatGPT / Claude     | Security analysis |
+- Understand the concept of **Zero Trust Architecture**
+- Implement **Identity-Centric Connectivity** using Tailscale
+- Apply **Micro-segmentation** to restrict service access
+- Enforce the **Principle of Least Privilege (RBAC)** using sudoers
+- Analyze security logs using **Generative AI tools**
+- Identify and explain security violations in a Zero Trust system
 
 ---
 
 ## ⚙️ Prerequisites
 
-- Kali Linux (or Ubuntu/Debian)
-- GitHub account
-- Basic Linux command knowledge
-- Internet connection
+Before starting this lab, ensure you have:
+
+- A Linux environment (Kali Linux / Ubuntu / Debian)
+- A GitHub account (for SSO authentication)
+- Basic knowledge of Linux commands
+- Internet connectivity
+- Permission to install software (sudo access)
 
 ---
 
-## 🚀 Lab Guide (Step-by-Step)
+## 🚀 Next Step
 
-👉 **Live Lab Guide:**  
-https://chaitanyan-00.github.io/zero-trust-lab
+👉 Proceed to the full step-by-step lab guide:  
+[View Lab Guide](docs/index.md)
 
 ---
 
-## 🔐 Architecture Diagram (Trust Boundary)
+## 🧠 Note
 
-```mermaid
-flowchart LR
-
-User[User Identity (GitHub SSO)]
-ZTNA[Tailscale Network]
-Server[Kali Linux Node]
-Service[Web Service :8080]
-Secrets[Sensitive File (/etc/zero-trust-secrets.conf)]
-
-User -->|Authenticated| ZTNA
-ZTNA --> Server
-Server --> Service
-Server --> Secrets
-
-Service -->|Allowed Access| User
-Secrets -->|Blocked Access| User
+This lab is designed for **Junior Security Analysts** and focuses on practical, hands-on implementation of Zero Trust principles.
